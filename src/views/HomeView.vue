@@ -1,63 +1,58 @@
 <template>
-  <el-container>
-    <el-header class="header" height="auto">
-      <!-- Logo space -->
-      <div class="header-logo">
-        <a href="#">
+  <div class="common-layout">
+    <el-container>
+      <el-header class="header" height="auto">
+        <!-- Logo space -->
+        <div class="header-logo">
           <img src="@/assets/logo.png" alt="Logo" class="logo">
-        </a>
-      </div>
-      <el-divider direction="vertical" style="margin-left: 5px;"></el-divider>
-      
-      <!-- Search input -->
-      <el-input 
-        placeholder="Procurar" 
-        prefix-icon="el-icon-search"
-        style="margin-top: 20px; text-align: center;"
-        v-model="searchQuery">
-      </el-input>
+        </div>
 
-      <!-- Spacer -->
-      <div style="flex-grow: 1;"></div>
+        <!-- Search input -->
+        <el-divider direction="vertical" style="margin-left: 5px;"></el-divider>
+        <!-- <el-input placeholder="Procurar" style="width: 300px;" prefix-icon="el-icon-search" v-model="searchQuery" /> -->
 
-      <!-- Notifications and avatar space -->
-      <el-dropdown trigger="click" style="margin-right: 20px;">
-        <span class="el-dropdown-link">
-          <el-avatar size="large" class="el-avatar-icon" style="background-color: blue;">
-            <span class="text-h5">{{ userInitials }}</span>
-          </el-avatar>
-        </span>
-        <el-dropdown-menu>
-          <el-dropdown-item>
-            <el-avatar size="large" style="background-color: blue; margin-bottom: 10px;">
+        <!-- Spacer -->
+        <div style="flex-grow: 1;"></div>
+
+        <!-- Notifications and avatar space -->
+        <el-dropdown trigger="click" style="margin-right: 20px;">
+          <span class="el-dropdown-link">
+            <el-avatar size="large" class="el-avatar-icon" style="background-color: blue;">
               <span class="text-h5">{{ userInitials }}</span>
             </el-avatar>
-            <div>
-              <el-button type="text" style="width: 100%;">Editar Conta</el-button>
-            </div>
-            <el-divider></el-divider>
-            <div>
-              <el-button type="text" style="width: 100%;">
-                <router-link to="/">Desconectar</router-link>
-              </el-button>
-            </div>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      
-      <div class="user-details">
-        <b>{{ userState.name }}</b>
-        <p class="text-caption mt-1">{{ userState.email }}</p>
-      </div>
-    </el-header>
-    
-    <!-- Main content -->
-    <el-main>
-      <BoardNav />
-      <el-divider></el-divider>
-      <Board :userId="userState.id" />
-    </el-main>
-  </el-container>
+          </span>
+          <el-dropdown-menu>
+            <el-dropdown-item>
+              <el-avatar size="large" style="background-color: blue; margin-bottom: 10px;">
+                <span class="text-h5">{{ userInitials }}</span>
+              </el-avatar>
+              <div>
+                <el-button type="text" style="width: 100%;">Editar Conta</el-button>
+              </div>
+              <el-divider></el-divider>
+              <div>
+                <el-button type="text" style="width: 100%;">
+                  <router-link to="/">Desconectar</router-link>
+                </el-button>
+              </div>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+
+        <div class="user-details">
+          <b>{{ userState.name }}</b>
+          <p class="text-caption mt-1">{{ userState.email }}</p>
+        </div>
+      </el-header>
+
+      <!-- Main content -->
+      <el-main class="main">
+        <BoardNav class="board-nav"/>
+        <el-divider></el-divider>
+        <Board :userId="userState.id" />
+      </el-main>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -101,11 +96,19 @@ export default {
 </script>
 
 <style scoped>
+.el-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.el-main {
+  height: 100vh;
+}
+
 .header {
   display: flex;
-  text-align: center;
-  margin: auto;
   align-items: center;
+  justify-items: space-between;
 }
 
 .header-logo {
@@ -123,5 +126,12 @@ export default {
   margin-left: 10px;
   padding: 5px;
   text-align: left;
+}
+
+.brand-title {
+  font-size: larger;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 </style>

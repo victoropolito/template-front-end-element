@@ -1,8 +1,7 @@
 <template>
   <div>
     <el-button type="primary" size="large" @click="openModal">
-      Nova Task
-      <el-icon><i class="el-icon-plus"></i></el-icon>
+      <b>NOVA TASK</b>
     </el-button>
 
     <el-dialog v-model="modalOpen" title="Adicionar Nova Tarefa" :width="600" :modal="true">

@@ -1,35 +1,43 @@
 <template>
-  <el-container>
-    <el-row type="flex" justify="space-between" align="middle" class="board-nav">
-      <el-col>
-        <el-icon class="mr-2">
-          <i class="el-icon-infinite"></i>
-        </el-icon>
-        <span class="brand-title">Projeto Chameleon</span>
-      </el-col>
-      <el-col>
-        <create-issue-modal v-model:visible="dialog"></create-issue-modal>
-      </el-col>
-    </el-row>
-  </el-container>
+  <el-row justify="space-between" class="custom-row">
+    <el-col :span="12" class="left-align">
+      <div class="brand-title">Projeto Chameleon</div>
+    </el-col>
+    <el-col :span="12" class="right-align">
+      <create-issue-modal></create-issue-modal>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import CreateIssueModal from './project/modals/CreateIssueModal.vue'
-
-const dialog = ref(false)
 </script>
 
 <style scoped>
+.custom-row {
+  width: 100%;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.right-align {
+  text-align: right;
+}
+
 .board-nav {
   margin-bottom: 20px;
+  max-height: 300px;
+  overflow: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .brand-title {
   font-size: larger;
-  font-weight: bold;
   display: flex;
   align-items: center;
+  color: black;
 }
 </style>

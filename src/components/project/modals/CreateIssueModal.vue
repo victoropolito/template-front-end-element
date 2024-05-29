@@ -4,16 +4,24 @@
       <b>Nova Task</b>
     </el-button>
 
-    <el-dialog v-model="modalOpen" title="Adicionar Nova Tarefa" :width="600" :modal="true">
-      <el-form @submit.prevent="submitForm">
+    <el-dialog 
+      v-model="modalOpen" 
+      :width="600" 
+      >
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">Adicionar nova tarefa</h4>
+        </div>
+      </template>
+      <el-form @submit.prevent="submitForm" label-width="auto" style="max-width: 600px">
         <el-form-item label="Título da Tarefa" :required="true">
           <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item label="Descrição" :required="true">
           <el-input type="textarea" v-model="form.description"></el-input>
         </el-form-item>
+        <create-category-modal style="margin-bottom: 5px;"/>
         <el-form-item label="Categorias">
-          <create-category-modal />
           <el-select v-model="form.category_ids" multiple placeholder="Selecione">
             <el-option
               v-for="category in categoriesItems"
@@ -23,19 +31,9 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Usuário" :required="true">
-          <el-select v-model="form.user_id" placeholder="Selecione">
-            <el-option
-              v-for="user in users"
-              :key="user"
-              :label="user"
-              :value="user">
-            </el-option>
-          </el-select>
-        </el-form-item>
       </el-form>
       <span class="dialog-footer">
-        <el-button @click="closeModal">Cancelar</el-button>
+        <el-button @click="closeModal" plain>Cancelar</el-button>
         <el-button type="primary" @click="submitForm">Salvar</el-button>
       </span>
     </el-dialog>
@@ -55,10 +53,9 @@ export default {
         description: '',
         status: 'BACKLOG',
         category_ids: [],
-        user_id: '',
+        user_id: '664270c9472c3c191f2576e1',
       },
       categoriesItems: [],
-      users: ['664270c9472c3c191f2576e1', 'Usuário 2', 'Usuário 3'],
     }
   },
   computed: {
@@ -110,3 +107,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>

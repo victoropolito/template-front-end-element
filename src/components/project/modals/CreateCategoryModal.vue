@@ -2,7 +2,7 @@
   <div>
     <el-button @click="openModal" type="primary" size="small">
       Criar nova categoria
-      <el-icon><i class="el-icon-plus"></i></el-icon>
+      <el-icon style="margin-left: 2px"><Plus /></el-icon>
     </el-button>
 
     <el-dialog v-model="modalOpen" title="Criar nova categoria" :width="500">

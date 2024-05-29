@@ -8,14 +8,6 @@
   background-color: #F6F7F9;
 }
 
-a,
-.red {
-  text-decoration: none;
-  color: rgb(189, 0, 0);
-  transition: 0.4s;
-  padding: 3px;
-}
-
 @media (hover: hover) {
   a:hover {
     background-color: rgba(248, 248, 248, 0.76);

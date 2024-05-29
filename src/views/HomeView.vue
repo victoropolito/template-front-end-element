@@ -42,8 +42,8 @@
           </el-dropdown>
 
           <div class="user-details">
-            <b class="user-name">Nome Usuario</b>
-            <p class="text-caption mt-1">email@usuario.com</p>
+            <b class="user-name">{{ userState.name }}</b>
+            <p class="text-caption mt-1">{{ userState.email }}</p>
           </div>
         </div>
       </el-header>
@@ -83,7 +83,7 @@ export default {
         const lastNameInitial = nameParts.length > 1 ? nameParts[1].charAt(0) : ''
         return firstNameInitial.toUpperCase() + (lastNameInitial.toUpperCase() ? lastNameInitial.toUpperCase() : '')
       } else {
-        return 'user'
+        return ''
       }
     }
   },

@@ -1,47 +1,50 @@
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container style="padding-top: 5px">
       <el-header class="header" height="auto">
-        <!-- Logo space -->
-        <div class="header-logo">
-          <img src="@/assets/logo.png" alt="Logo" class="logo">
+        <div class="header-left">
+          <!-- Logo space -->
+          <div class="header-logo">
+            <img src="@/assets/logo.png" alt="Logo" class="logo">
+          </div>
+
+          <!-- Divider -->
+          <el-divider direction="vertical" style="margin-left: 5px;"></el-divider>
         </div>
 
         <!-- Search input -->
-        <el-divider direction="vertical" style="margin-left: 5px;"></el-divider>
-        <!-- <el-input placeholder="Procurar" style="width: 300px;" prefix-icon="el-icon-search" v-model="searchQuery" /> -->
-
-        <!-- Spacer -->
-        <div style="flex-grow: 1;"></div>
+        <div class="header-center">
+          <el-input placeholder="Procurar" v-model="searchQuery" class="search-input" />
+        </div>
 
         <!-- Notifications and avatar space -->
-        <el-dropdown trigger="click" style="margin-right: 20px;">
-          <span class="el-dropdown-link">
-            <el-avatar size="large" class="el-avatar-icon" style="background-color: blue;">
+        <div class="header-right">
+          <el-dropdown trigger="click">
+            <el-avatar size="large">
               <span class="text-h5">{{ userInitials }}</span>
             </el-avatar>
-          </span>
-          <el-dropdown-menu>
-            <el-dropdown-item>
-              <el-avatar size="large" style="background-color: blue; margin-bottom: 10px;">
-                <span class="text-h5">{{ userInitials }}</span>
-              </el-avatar>
-              <div>
-                <el-button type="text" style="width: 100%;">Editar Conta</el-button>
-              </div>
-              <el-divider></el-divider>
-              <div>
-                <el-button type="text" style="width: 100%;">
-                  <router-link to="/">Desconectar</router-link>
-                </el-button>
-              </div>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>
+                  <div>
+                    <el-button type="text">Editar Conta</el-button>
+                  </div>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <div>
+                    <el-button type="text">
+                      <router-link to="/">Desconectar</router-link>
+                    </el-button>
+                  </div>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
 
-        <div class="user-details">
-          <b>{{ userState.name }}</b>
-          <p class="text-caption mt-1">{{ userState.email }}</p>
+          <div class="user-details">
+            <b class="user-name">Nome Usuario</b>
+            <p class="text-caption mt-1">email@usuario.com</p>
+          </div>
         </div>
       </el-header>
 
@@ -54,6 +57,7 @@
     </el-container>
   </div>
 </template>
+
 
 <script>
 import Board from '@/components/Board.vue'
@@ -79,7 +83,7 @@ export default {
         const lastNameInitial = nameParts.length > 1 ? nameParts[1].charAt(0) : ''
         return firstNameInitial.toUpperCase() + (lastNameInitial.toUpperCase() ? lastNameInitial.toUpperCase() : '')
       } else {
-        return ''
+        return 'user'
       }
     }
   },
@@ -108,7 +112,29 @@ export default {
 .header {
   display: flex;
   align-items: center;
-  justify-items: space-between;
+  justify-content: space-between; /* Espaço entre os elementos principais */
+}
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.header-right {
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .header-logo {
@@ -120,12 +146,22 @@ export default {
   height: 40px;
 }
 
+.search-input {
+  max-width: 500px;
+  width: 100%;
+}
+
 .user-details {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   padding: 5px;
   text-align: left;
+  color: black;
+}
+
+.user-name {
+  font-weight: bold;
 }
 
 .brand-title {
@@ -133,5 +169,17 @@ export default {
   font-weight: bold;
   display: flex;
   align-items: center;
+}
+
+.demo-type {
+  display: flex;
+}
+.demo-type > div {
+  flex: 1;
+  text-align: center;
+}
+
+.demo-type > div:not(:last-child) {
+  border-right: 1px solid var(--el-border-color);
 }
 </style>

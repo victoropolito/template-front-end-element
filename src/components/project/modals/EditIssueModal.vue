@@ -1,9 +1,18 @@
 <template>
   <div>
-    <el-button type="primary" icon="el-icon-edit" circle @click="openModal"></el-button>
+    <el-button type="primary" icon="Edit" circle @click="openModal"/>
 
-    <el-dialog v-model="modalOpen" title="Editar Tarefa" :width="600" :modal="true">
-      <el-form @submit.prevent="submitForm">
+    <el-dialog 
+      v-model="modalOpen" 
+      :width="600" 
+      :modal="true"
+      >
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">Editar Tarefa</h4>
+        </div>
+      </template>
+      <el-form @submit.prevent="submitForm" label-width="auto">
         <el-form-item label="Novo título" :required="true">
           <el-input v-model="editCard.title"></el-input>
         </el-form-item>
@@ -30,7 +39,12 @@
 </template>
 
 <script>
+import { Edit } from '@element-plus/icons-vue'
+
 export default {
+  components: {
+    Edit
+  },
   props: {
     card: {
       type: Object,
@@ -79,3 +93,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>

@@ -1,21 +1,33 @@
 <template>
   <div>
-    <el-button type="danger" icon="el-icon-delete" circle @click="openModal"></el-button>
+    <el-button type="danger" icon="Delete" circle @click="openModal" />
 
-    <el-dialog v-model="modalOpen" title="Excluir tarefa" :width="600" :modal="true">
-      <el-form @submit.prevent="deleteCard">
-        <span>Deseja mesmo excluir a tarefa? Essa ação é irreversível!</span>
-        <span class="dialog-footer">
-          <el-button @click="modalOpen = false">Cancelar</el-button>
-          <el-button type="primary" @click="deleteCard">Excluir</el-button>
-        </span>
-      </el-form>
+    <el-dialog 
+      v-model="modalOpen" 
+      :width="500" 
+      :modal="true"
+      >
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">Excluir tarefa?</h4>
+        </div>
+      </template>
+      <span>Deseja mesmo excluir a tarefa? Essa ação é irreversível!</span>
+      <template #footer>
+        <el-button @click="modalOpen = false">Cancelar</el-button>
+        <el-button type="danger" @click="deleteCard">Excluir</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import { Delete } from '@element-plus/icons-vue'
+
 export default {
+  components: {
+    Delete
+  },
   props: {
     card: {
       type: Object,
@@ -46,3 +58,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>

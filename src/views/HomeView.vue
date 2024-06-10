@@ -14,7 +14,7 @@
 
         <!-- Search input -->
         <div class="header-center">
-          <el-input placeholder="Procurar" v-model="searchQuery" class="search-input" />
+          <el-input placeholder="Pesquisar" v-model="searchQuery" class="search-input" />
         </div>
 
         <!-- Notifications and avatar space -->

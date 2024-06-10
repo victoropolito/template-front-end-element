@@ -8,15 +8,16 @@
         </div>
       </template>
       <el-card v-for="card in cards" :key="card.id" class="inner-card">
-        <div class="clearfix">
-          <el-avatar :src="card.avatar"></el-avatar>
-          <span>{{ card.title }}</span>
-        </div>
+        <template #header>
+          <h3><b>{{ card.title }}</b></h3>
+        </template>
         <div>
           <el-tag v-for="category in card.categories" 
             :key="category.name" 
-            :style="{ backgroundColor: category.color }" 
-            class="tag-margin">
+            :style="{ backgroundColor: category.color, color: 'white' }" 
+            class="tag-margin"
+            round
+          >
             {{ category.name }}
           </el-tag>
         </div>

@@ -20,7 +20,7 @@
         <el-form-item label="Descrição" :required="true">
           <el-input type="textarea" v-model="form.description"></el-input>
         </el-form-item>
-        <create-category-modal style="margin-bottom: 5px;"/>
+        <create-category-modal style="margin-bottom: 5px;" @category-created="fetchCategories"/>
         <el-form-item label="Categorias">
           <el-select v-model="form.category_ids" multiple placeholder="Selecione">
             <el-option
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import CreateCategoryModal from './CreateCategoryModal.vue'
 
 export default {
@@ -53,14 +54,17 @@ export default {
         description: '',
         status: 'BACKLOG',
         category_ids: [],
-        user_id: '664270c9472c3c191f2576e1',
       },
       categoriesItems: [],
     }
   },
   computed: {
+    ...mapState(['user']),
     categories() {
       return this.$store.state.categories
+    },
+    userId() {
+      return this.user.id
     }
   },
   methods: {
@@ -78,24 +82,24 @@ export default {
         description: '',
         status: 'BACKLOG',
         category_ids: [],
-        user_id: '',
+        user_id: null,
       }
     },
     async submitForm() {
       try {
-        await this.$store.dispatch('createCardStore', {
-          userId: this.form.user_id,
+        await this.$store.dispatch('createCardStore', { 
+          userId: this.userId, 
           cardForm: this.form,
         })
         this.closeModal()
       } catch (error) {
         console.error('Erro ao salvar tarefa:', error)
-        alert('Erro ao salvar tarefa. Tente novamente.')
+        alert('Erro ao salvar tarefa. Preencha os campos obrigatórios.')
       }
     },
     async fetchCategories() {
       try {
-        await this.$store.dispatch('fetchCategoriesStore', '664270c9472c3c191f2576e1')
+        await this.$store.dispatch('fetchCategoriesStore', this.userId)
         this.categoriesItems = this.categories.map(category => ({
           id: category.id,
           name: category.name,

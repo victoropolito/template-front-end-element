@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-row gutter="20">
+    <el-row gutter=20>
       <card-column :status-label="'Não iniciado'" :cards="filteredCards('BACKLOG')" />
       <card-column :status-label="'Em Progresso'" :cards="filteredCards('IN PROGRESS')" />
       <card-column :status-label="'Concluído'" :cards="filteredCards('COMPLETED')" />
@@ -40,7 +40,7 @@ export default {
     },
     filteredCards(status) {
       return this.cards.filter(card => card.status === status);
-    },
+    }
   },
 }
 </script>

@@ -1,18 +1,25 @@
 <template>
   <div>
-    <el-button @click="openModal" type="primary" size="small">
+    <el-button @click="openModal" type="primary" size="small" icon="Plus">
       Criar nova categoria
-      <el-icon style="margin-left: 2px"><Plus /></el-icon>
     </el-button>
 
-    <el-dialog v-model="modalOpen" title="Criar nova categoria" :width="500">
-      <el-form @submit.prevent="submitForm">
-        <el-form-item label="Escolha um texto e uma cor para a nova categoria"></el-form-item>
+    <el-dialog 
+      v-model="modalOpen" 
+      :width="400"
+      >
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">Criar nova categoria</h4>
+        </div>
+      </template>
+
+      <el-form @submit.prevent="submitForm" label-width="auto" label-position="top">
         <el-form-item label="Nome da categoria" :required="true">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="Cor da categoria">
-          <el-color-picker v-model="form.color"></el-color-picker>
+        <el-form-item label="Cor da categoria" :required="true">
+          <el-color-picker v-model="form.color" size="large"></el-color-picker>
         </el-form-item>
       </el-form>
       <span class="dialog-footer">
@@ -25,8 +32,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import { Plus } from '@element-plus/icons-vue'
 
 export default {
+  components: {
+    Plus
+  },
   data() {
     return {
       modalOpen: false,
@@ -36,27 +47,35 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapState(['user']),
+    userId() {
+      return this.user.id
+    }
+  },
   methods: {
     openModal() {
       this.modalOpen = true
     },
-    async submitForm() {
-      const user_id = '664270c9472c3c191f2576e1'
-
+    async submitForm() {    
       try {
-        await this.$store.dispatch('createCategoryStore', { userId: user_id, categoryForm: this.form })
+        await this.$store.dispatch('createCategoryStore', { userId: this.userId, categoryForm: this.form })
         this.modalOpen = false
-        return true
+        this.$emit('category-created')
       } catch (error) {
         throw error
       }
     },
   },
-  computed: {
-    ...mapState(['user']),
-    userState() {
-      return this.user;
-    }
-  },
+
 }
 </script>
+
+<style scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>

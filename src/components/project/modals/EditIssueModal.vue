@@ -40,6 +40,7 @@
 
 <script>
 import { Edit } from '@element-plus/icons-vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -54,9 +55,7 @@ export default {
   data() {
     return {
       modalOpen: false,
-      cards: [],
       editCard: {
-        user_id: '664270c9472c3c191f2576e1',
         title: '',
         description: '',
         status: '',
@@ -65,25 +64,34 @@ export default {
       allStatus: ['BACKLOG', 'IN PROGRESS', 'COMPLETED'],
     }
   },
+  computed: {
+    ...mapState(['user']),
+    userId() {
+      return this.user.id
+    }
+  },
   methods: {
     openModal() {
       this.modalOpen = true
+      this.editCard = { ...this.card }
     },
     closeModal() {
       this.resetForm()
       this.modalOpen = false
     },
     resetForm() {
-      this.editCard.title = ''
-      this.editCard.description = ''
-      this.editCard.category_ids = null
-      this.editCard.user_id = null
+      this.editCard = {
+        title: '',
+        description: '',
+        status: '',
+        category_ids: []
+      }
     },
     async submitForm() {
-      const id = this.card.id;
+      const id = this.card.id
 
       try {
-        await this.$store.dispatch('editCard', { cardId: id, updatedCardData: this.editCard })
+        await this.$store.dispatch('editCard', { cardId: id, updatedCardData: { ...this.editCard, user_id: this.userId } })
         this.closeModal()
         return true
       } catch (error) {

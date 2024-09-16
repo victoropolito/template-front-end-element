@@ -1,14 +1,21 @@
-# template-front-end-element
+# CHAMELEON STACK - TEMPLATE ELEMENT+
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the front-end of a Kanban solution project developed in Vue.js 3, aimed at development teams looking for an adaptable and efficient task management tool.
 
-## Recommended IDE Setup
+### 📋 PREREQUISITES
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Docker
+- NodeJs
+- NPM
+- Vue.js
 
-## Customize configuration
+### 🔧 INSTALLING PREREQUISITES
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Installing NodeJS and NPM
+
+Follow the steps in the following link to setup the back-end properly:
+
+Link: [Chameleon-Backend](https://github.com/Chameleon-Stack/template-nodejs-express-mongo-prisma)
 
 ## Project Setup
 
@@ -20,16 +27,4 @@ npm install
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+``` 

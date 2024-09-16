@@ -12,7 +12,7 @@
           <h4 :id="titleId" :class="titleClass">Editar Tarefa</h4>
         </div>
       </template>
-      <el-form @submit.prevent="submitForm" label-width="auto">
+      <el-form @submit.prevent="submitForm" label-width="auto" style="max-width: 600px">
         <el-form-item label="Novo título" :required="true">
           <el-input v-model="editCard.title"></el-input>
         </el-form-item>
@@ -29,9 +29,22 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <div class="category-modal-container">
+          <create-category-modal @category-created="fetchCategories"/>
+        </div>
+        <el-form-item label="Categorias">
+          <el-select v-model="editCard.category_ids" multiple placeholder="Selecione">
+            <el-option
+              v-for="category in categoriesItems"
+              :key="category.id"
+              :label="category.name"
+              :value="category.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <span class="dialog-footer">
-        <el-button @click="closeModal">Cancelar</el-button>
+        <el-button @click="closeModal" plain>Cancelar</el-button>
         <el-button type="primary" @click="submitForm">Salvar</el-button>
       </span>
     </el-dialog>
@@ -41,10 +54,11 @@
 <script>
 import { Edit } from '@element-plus/icons-vue'
 import { mapState } from 'vuex'
+import CreateCategoryModal from './CreateCategoryModal.vue'
 
 export default {
   components: {
-    Edit
+    Edit, CreateCategoryModal
   },
   props: {
     card: {
@@ -62,17 +76,22 @@ export default {
         category_ids: []
       },
       allStatus: ['BACKLOG', 'IN PROGRESS', 'COMPLETED'],
+      categoriesItems: []
     }
   },
   computed: {
     ...mapState(['user']),
     userId() {
       return this.user.id
-    }
+    },
+    categories() {
+      return this.$store.state.categories
+    },
   },
   methods: {
     openModal() {
       this.modalOpen = true
+      this.fetchCategories()
       this.editCard = { ...this.card }
     },
     closeModal() {
@@ -98,6 +117,17 @@ export default {
         throw error
       }
     },
+    async fetchCategories() {
+      try {
+        await this.$store.dispatch('fetchCategoriesStore', this.userId)
+        this.categoriesItems = this.categories.map(category => ({
+          id: category.id,
+          name: category.name,
+        }))
+      } catch (error) {
+        console.error('Erro ao obter categorias:', error)
+      }
+    },
   },
 }
 </script>
@@ -108,5 +138,10 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   gap: 16px;
+}
+.category-modal-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2px;
 }
 </style>

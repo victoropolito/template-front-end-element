@@ -1,7 +1,7 @@
 <template>
   <el-row justify="space-between" class="custom-row">
     <el-col :span="12" class="left-align">
-      <div class="brand-title">Projeto Chameleon</div>
+      <h3 class="brand-title">Projeto Chameleon</h3>
     </el-col>
     <el-col :span="12" class="right-align">
       <create-issue-modal></create-issue-modal>

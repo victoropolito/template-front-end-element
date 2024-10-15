@@ -54,7 +54,7 @@
       </el-form>
 
       <div class="router-button">
-        <router-link to="/create" class="text-blue">
+        <router-link to="/create" class="text-blue" style="text-decoration: none">
           Cadastrar agora
         </router-link>
       </div>

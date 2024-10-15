@@ -3,21 +3,14 @@
     <el-container style="padding-top: 5px">
       <el-header class="header" height="auto">
         <div class="header-left">
-          <!-- Logo space -->
           <div class="header-logo">
             <img src="@/assets/logo.png" alt="Logo" class="logo">
           </div>
-
-          <!-- Divider -->
           <el-divider direction="vertical" style="margin-left: 5px;"></el-divider>
         </div>
-
-        <!-- Search input -->
         <div class="header-center">
           <el-input placeholder="Pesquisar" v-model="searchQuery" class="search-input" />
         </div>
-
-        <!-- Notifications and avatar space -->
         <div class="header-right">
           <el-dropdown trigger="click">
             <el-avatar size="large">
@@ -26,38 +19,27 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>
-                  <div>
-                    <el-button type="text">Editar Conta</el-button>
-                  </div>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <div>
-                    <el-button type="text">
-                      <router-link to="/">Desconectar</router-link>
-                    </el-button>
-                  </div>
+                  <el-button type="text">
+                    <router-link to="/" style="text-decoration: none; color: inherit">Desconectar</router-link>
+                  </el-button>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-
           <div class="user-details">
             <b class="user-name">{{ userState.name }}</b>
             <p class="text-caption mt-1">{{ userState.email }}</p>
           </div>
         </div>
       </el-header>
-
-      <!-- Main content -->
       <el-main class="main">
-        <BoardNav class="board-nav"/>
+        <BoardNav class="board-nav" />
         <el-divider></el-divider>
         <Board :userId="userState.id" />
       </el-main>
     </el-container>
   </div>
 </template>
-
 
 <script>
 import Board from '@/components/Board.vue'
@@ -112,7 +94,7 @@ export default {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Espaço entre os elementos principais */
+  justify-content: space-between;
 }
 
 .header-left,
@@ -174,12 +156,13 @@ export default {
 .demo-type {
   display: flex;
 }
-.demo-type > div {
+
+.demo-type>div {
   flex: 1;
   text-align: center;
 }
 
-.demo-type > div:not(:last-child) {
+.demo-type>div:not(:last-child) {
   border-right: 1px solid var(--el-border-color);
 }
 </style>

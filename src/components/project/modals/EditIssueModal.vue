@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" icon="Edit" circle @click="openModal"/>
+    <el-button type="primary" icon="Edit" @click="openModal"/>
 
     <el-dialog 
       v-model="modalOpen" 

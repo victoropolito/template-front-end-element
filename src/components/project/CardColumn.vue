@@ -23,12 +23,8 @@
         </div>
         <div><i>{{ card.description }}</i></div>
         <div class="card-actions">
-          <el-button type="primary">
-            <edit-issue-modal :card="card" />
-          </el-button>
-          <el-button type="danger">
-            <delete-issue-modal :card="card" />
-          </el-button>
+          <edit-issue-modal :card="card" />
+          <delete-issue-modal :card="card" />
         </div>
       </el-card>
     </el-card>

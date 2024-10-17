@@ -8,7 +8,7 @@
       <el-form label-position="top" label-width="auto" :model="formLabelAlign"
         style="min-width:400px; max-width: 600px; display: flex; flex-direction: column">
         <el-form-item label="Nome">
-          <el-input v-model="form.name" placeholder="Nome & Sobrenome" clearable />
+          <el-input v-model="form.name" placeholder="Nome" clearable />
         </el-form-item>
         <el-form-item label="Email">
           <el-input v-model="form.email" placeholder="seumail@exemplo.com" clearable></el-input>
@@ -25,7 +25,10 @@
         <el-form-item>
           <div class="avatar-form-item">
             <el-avatar size="large">
-              <el-button icon="el-icon-camera" circle>
+              <el-button circle>
+                <el-icon>
+                  <Camera />
+                </el-icon>
                 <input type="file" ref="fileInput" class="file-input" @change="handleFileUpload" />
               </el-button>
             </el-avatar>
@@ -34,7 +37,7 @@
 
         <el-button @click="submitForm" type="primary" size="large" block>
           <router-link to="/">
-            <b>Criar novo usuário</b>
+            Criar novo usuário
           </router-link>
         </el-button>
       </el-form>
@@ -122,6 +125,7 @@ export default {
 .avatar-form-item {
   display: flex;
   justify-items: center;
+  margin-left: 170px;
 }
 
 .file-input {
@@ -133,4 +137,9 @@ export default {
   opacity: 0;
   cursor: pointer;
 }
+
+.new-user {
+  text-decoration: none;
+  color: rgb(8, 73, 158);
+} 
 </style>

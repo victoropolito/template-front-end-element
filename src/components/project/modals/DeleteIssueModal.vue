@@ -1,7 +1,6 @@
 <template>
   <div>
-    <el-button type="danger" icon="Delete" circle @click="openModal" />
-
+    <el-button type="danger" icon="Delete" @click="openModal" />
     <el-dialog 
       v-model="modalOpen" 
       :width="500" 
